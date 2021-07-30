@@ -7,8 +7,8 @@
     "lint": "eslint src/**/*.js --fix",
     "format": "prettier-eslint src/**/*.{js,json} --write",
     "test": "jest --passWithNoTests --testPathPattern=$TEST_PATH",
-    "dev": "nodemon --exec babel-node server.js",
-    "build": "webpack"
+    "serve": "babel-node --extensions \".ts\" server.ts",
+    "dev": "nodemon --exec npm run serve"
   },
   "lint-staged": {
     "*.js": [
@@ -25,10 +25,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.14.6",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
     "@babel/node": "^7.14.7",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.4.7",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "eslint": "^6.0.1",
@@ -42,16 +45,24 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^3.0.5",
     "morgan": "^1.9.1",
-    "nodemon": "^2.0.3",
+    "nodemon": "2.0.4",
     "nodemon-webpack-plugin": "^4.5.2",
     "prettier": "^2.3.2",
     "prettier-eslint-cli": "^5.0.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^4.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.35"
   }
 }

@@ -6,6 +6,7 @@
   },
   "extends": ["plugin:prettier/recommended", "standard"],
   "plugins": ["prettier"],
+  
   "rules": {
     "prettier/prettier": "error",
     "camelcase": "warn",
@@ -18,7 +19,13 @@
         "ignoreReadBeforeAssign": false
       }
     ],
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "comma-dangle": [
+      "error",
+      {
+        "all": "never"
+      }
+    ]
   },
   "parser": "babel-eslint",
   "parserOptions": {
