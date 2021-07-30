@@ -1,9 +1,7 @@
-import { getConnection } from "typeorm";
 import { Movie } from "../entities/movies";
 
-const insertMovie = async (movie: CreateMovieDto) => {
-  const movieConection = getConnection().getRepository(Movie)
-  return await movieConection.insert(movie)
+const insertMovie = async (createMovieDto: CreateMovieDto) => {
+  return await (await Movie.insert(createMovieDto)).generatedMaps
 }
 
 export default { insertMovie }
