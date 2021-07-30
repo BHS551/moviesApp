@@ -58,10 +58,13 @@
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.14.5",
     "apollo-server": "^3.1.1",
+    "apollo-server-express": "^3.1.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "graphql": "^15.5.1",
+    "lint-staged": "^11.1.1",
     "mongodb": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",

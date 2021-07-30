@@ -1,14 +1,20 @@
 import App from './src/app'
 import {} from 'dotenv/config'
-import bodyParser from 'body-parser'
-import cors from 'cors'
 
 import config from './src/config'
 import { moviesRouter } from './src/routes'
+import { moviesResolver } from './src/resolvers'
+import Server from './src/server'
 
-const routers = [ moviesRouter ]
-const app = new App(routers, +config.app.port)
+// Rest implementation
+// const routers = [ moviesRouter ]
+// const app = new App(routers, +config.app.port)
 
-app.listen()
+const resolvers = {
+  ...moviesResolver
+}
 
-export default app
+const server = new Server(resolvers);
+server.startApolloServer();
+
+export default server
