@@ -19,7 +19,7 @@ const createMovie = async (createMovieDto: CreateMovieDto): Promise<IMovie> => {
 const getMovies = async (): Promise<IMovie[]> => {
   try {
     const moviesRepository = await getMongoRepository(Movie);
-    const response = await moviesRepository.findOne("613ae7fa77d2b35661e9b4e1");
+    const response = await moviesRepository.find();
     console.log(response)
     return response;
   } catch (err) {
