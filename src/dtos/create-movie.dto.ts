@@ -1,4 +1,4 @@
 class CreateMovieDto {
-  name: string;
-  author: string;
+  name: String;
+  author: String;
 }

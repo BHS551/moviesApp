@@ -4,14 +4,14 @@ const listMovies = async (req, res, next) => {
   res.json({ status: 0 })
 }
 
-const insertMovie = async (req, res, next) => {
+const createMovie = async (req, res, next) => {
   const { name, author } = req.body
   const movie: CreateMovieDto = {
     name, author
   }
-  const response = await moviesService.insertMovie(movie)
+  const response = await moviesService.createMovie(movie)
   res.json(response)
 }
 
 
-export default { listMovies, insertMovie }
+export default { listMovies, createMovie }

@@ -1,6 +1,7 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
 import { Connection, createConnection } from "typeorm";
+import { Movie } from "./entities";
 import schema from "./schema";
 
 class Server {
@@ -10,35 +11,44 @@ class Server {
   private connection: Connection;
 
   constructor(resolvers) {
-    this.resolvers = {
-      Query: {
-        ...resolvers,
-      },
-    }
-    this.apolloServer = new ApolloServer({ typeDefs: schema, rootValue: this.resolvers });
+    this.resolvers = {...resolvers}
+    this.apolloServer = new ApolloServer({ typeDefs: schema, resolvers: this.resolvers });
     this.app = express();
     this.initializeDatabaseConection()
   }
 
   public async startApolloServer() {
     await this.apolloServer.start();
-    this.apolloServer.applyMiddleware({ app: this.app, cors: corsOptions });
+    this.apolloServer.applyMiddleware({path:'/graphql', app: this.app, cors: corsOptions });
     this.app.listen({ port: 4000 })
     console.info("app listening on port:", 4000)
   }
 
   public async initializeDatabaseConection() {
-    const connection = await createConnection();
-		if (connection === undefined) { throw new Error('Error connecting to database'); } // In case the connection failed, the app stops.
-		connection.synchronize(); // this updates the database schema to match the models' definitions
-		this.connection = connection; // Store the connection object in the class instance.
+    const connection = await createConnection({
+      type: "mongodb", 
+      host: "localhost", 
+      port: 27017,
+      database: "movies-app",
+      synchronize: true, 
+      logging: true,
+      logger: "file",
+      entities: [
+        Movie
+      ],
+    }).catch(err => {
+      throw new Error(err)
+    });
+		if (connection === undefined) { throw new Error('Error connecting to database'); }
+		connection.synchronize();
+		this.connection = connection;
 		console.info(`conected to database`)
   }
 
 }
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials: true,
   maxAge: 365 * 24 * 60 * 60
 }

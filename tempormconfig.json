@@ -1,0 +1,21 @@
+{ 
+  "type": "mongodb", 
+  "host": "localhost", 
+  "port": 3306, 
+  "url":"mongodb+srv://MoviesAppUser:9173@cluster0.qsgv5.mongodb.net/moviesApp?retryWrites=true&w=majority",
+  "synchronize": true, 
+  "logging": true,
+  "logger": "file",
+  "entities": [
+    "src/entity/**/*.ts"
+ ],
+ "migrations": [
+    "src/migration/**/*.ts"
+ ],
+ "subscribers": [
+    "src/subscriber/**/*.ts"
+ ],
+  "cli": { 
+    "entitiesDir": "src/entity", "migrationsDir": "src/migration", "subscribersDir": "src/subscriber" 
+  } 
+}

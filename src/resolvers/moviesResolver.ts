@@ -1,12 +1,17 @@
-import { Movie } from "../entities/movies";
+import IMovie from "../interfaces";
+import { moviesService } from "../services";
 
-const createMovie = (name:string, author: string): string => {
-  const movie= {
-    id: 123,
-    name,
-    author
-  }
-  return JSON.stringify(movie)
+const createMovie = {
+  createMovie: async (temp, input): Promise<IMovie> => {
+    const { name, author } = input;
+    const createMovieDto: CreateMovieDto = {
+      name, author
+    };
+    return await moviesService.createMovie(createMovieDto);
+}}
+
+const movies = async () => {
+  return await moviesService.getMovies();
 }
 
-export default { createMovie }
+export default { createMovie: createMovie.createMovie, movies }

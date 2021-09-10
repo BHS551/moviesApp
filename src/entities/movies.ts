@@ -1,21 +1,21 @@
 import { BaseEntity, Column, Entity, ObjectIdColumn } from "typeorm";
 
 @Entity()
-export class Movie extends BaseEntity {
+export default class Movie {
   @ObjectIdColumn()
-  id: String;
+  _id: String;
 
   @Column({
     type: 'varchar',
     nullable: false,
     length: 50
   })
-  name: string
+  name: String
 
   @Column({
     type: 'varchar',
     nullable: false,
     length: 50
   })
-  author: string
+  author: String
 }

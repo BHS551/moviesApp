@@ -1,7 +1,12 @@
+import IMovie from "../interfaces";
 import { moviesRepository } from "../repositories";
 
-const insertMovie = async (movie: CreateMovieDto) => {
-  return await moviesRepository.insertMovie(movie)
+const createMovie = async (movie: CreateMovieDto): Promise<IMovie> => {
+  return await moviesRepository.createMovie(movie)
 }
 
-export default { insertMovie }
+const getMovies = async (): Promise<IMovie[]> => {
+  return await moviesRepository.getMovies();
+}
+
+export default { createMovie, getMovies }
