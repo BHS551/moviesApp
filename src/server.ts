@@ -1,6 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
-import { Connection, createConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import { Movie } from "./entities";
 import schema from "./schema";
 
@@ -8,7 +8,6 @@ class Server {
   private resolvers;
   private apolloServer: ApolloServer;
   private app: express.Application;
-  private connection: Connection;
 
   constructor(resolvers) {
     this.resolvers = {...resolvers}
@@ -33,6 +32,7 @@ class Server {
       synchronize: true, 
       logging: true,
       logger: "file",
+      useUnifiedTopology: true,
       entities: [
         Movie
       ],
@@ -41,7 +41,6 @@ class Server {
     });
 		if (connection === undefined) { throw new Error('Error connecting to database'); }
 		connection.synchronize();
-		this.connection = connection;
 		console.info(`conected to database`)
   }
 
